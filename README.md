@@ -2,6 +2,8 @@
 
 This is an extension to an existing e-commerce site that allows users to buy products that are listed in an online recipe.
 
+**NOTE** This is my first attempt at working with Hibernate - I ran into issues with the entity managmenet persistence lifecycle where it appeared the products were added to the cart (as indicated in the resposne) but when retriving the same cart, the items property was empty.
+
 ## Feature
 
 Exposes REST Endpoints:
