@@ -1,7 +1,5 @@
 package rocks.teagantotally.buy_recipes.services
 
-import jakarta.persistence.EntityManager
-import jakarta.persistence.PersistenceContext
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 import rocks.teagantotally.buy_recipes.data.entities.Cart
@@ -23,7 +21,6 @@ class CartService(
         private var carts: CartRepository,
         private var recipes: RecipeRepository,
         private var products: ProductRepository,
-        @PersistenceContext private var entityManager: EntityManager,
 ) {
   fun getCarts(): List<Cart> = carts.findAll()
 
@@ -90,7 +87,7 @@ class CartService(
                   .apply {
                     recipes.findById(recipeId).orElse(null)?.let { items.removeAll(it.items) }
                   }
-                  .let { carts.save(it) }
+                  .apply { carts.save(this) }
 
   /**
    * Retrieves the items of a recipe by its ID.
